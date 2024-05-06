@@ -1,0 +1,58 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  tasks:
+    - name: Añadir repositorio e instalar Nodejs
+      shell: "curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - && sudo apt-get install -y nodejs"
+
+    - name: Instalar build-essential
+      apt:
+        name: build-essential
+        state: present
+
+    - name: Instalar pm2
+      command: npm install pm2@latest -g
+
+    - name: Iniciar aplicación hello.js con pm2
+      command: pm2 start /home/vagrant/hello.js
+
+    - name: Configurar pm2 para iniciar la App en el arranque del sistema
+      shell: eval $(pm2 startup | grep 'sudo' | sed -e 's/.*\[sudo\] //')
+
+    - name: Guardar las configuraciones de pm2
+      command: pm2 save
+    
+    - name: Instalar servidor web Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Eliminar archivos default de Nginx
+      file:
+        path: /etc/nginx/sites-available/default
+        state: absent
+
+    - name: Eliminar archivos default de Nginx
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+    - name: Copiar archivo configuración de Nginx
+      copy:
+        src: /home/vagrant/nginx.conf
+        dest: /etc/nginx/sites-available
+        owner: www-data
+        group: www-data
+        mode: "644"
+
+    - name: Crear enlace simbólico del archivo conf. de Nginx
+      file:
+        src: /etc/nginx/sites-available/nginx.conf
+        dest: /etc/nginx/sites-enabled/nginx.conf
+        state: link
+
+    - name: Reiniciar el servicio de Nginx
+      service:
+        name: nginx
+        state: restarted
