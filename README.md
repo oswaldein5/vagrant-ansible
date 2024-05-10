@@ -10,9 +10,9 @@ Useful for building preconfigured virtual machine images for local environments 
    - [playbook.yaml](files/playbook.yaml)
 
 ### 2. Project files
-   - [Script para ejecutar playbook](run_ansible.sh)
-   - [Aplicación JavaScript](files/hello.js)
-   - [Configuración Servidor Web Nginx](files/nginx.conf)
+   - [Script to run playbook](run_ansible.sh)
+   - [JavaScript Application](files/hello.js)
+   - [Nginx Web Server Configuration](files/nginx.conf)
   
 ### 3. Vagrant configuration file
    - [Vagrantfile](Vagrantfile)
