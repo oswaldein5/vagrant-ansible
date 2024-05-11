@@ -18,6 +18,8 @@ Useful for building preconfigured virtual machine images for local environments 
    - [Vagrantfile](Vagrantfile)
 
 ### 4. Start Virtual Machine with Ubuntu Server 22.04
-   - `vagrant init bento/ubuntu-22.04`
-   - `vagrant up`
-   - At the end we make a test in the browser: `http://localhost`
+```sh
+vagrant init bento/ubuntu-22.04
+vagrant up
+http://localhost
+```

@@ -17,6 +17,8 @@ Generar una imagen local mediante **Vagrant** utilizando **Ansible** para la ins
    - [Vagrantfile](Vagrantfile)
 
 ### 4. Iniciar Maquina Virtual con Ubuntu Server 22.04
-   - `vagrant init bento/ubuntu-22.04`
-   - `vagrant up`
-   - Al finalizar hacemos un test en el browser: `http://localhost`
+```sh
+vagrant init bento/ubuntu-22.04
+vagrant up
+http://localhost
+```
