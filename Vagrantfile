@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
 	config.vm.box = "bento/ubuntu-22.04"
-	
+
 	config.vm.network "forwarded_port", guest: 80, host: 80
 
 	config.vm.synced_folder "files", "/home/vagrant",
@@ -14,6 +14,7 @@ Vagrant.configure("2") do |config|
 		vb.memory = "2048"
 	end
 
+	# Ansible provision
 	config.vm.provision "shell", inline: <<-SHELL
 		sudo apt update
 		sudo apt install ansible -y
